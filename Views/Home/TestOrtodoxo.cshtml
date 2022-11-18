@@ -1,6 +1,8 @@
+@using System.Text.Json
 @{
   ViewData["Title"] = "Test Ortodoxo";
   Test test = new Test();
+  string idBtn;
 }
 
 <div class="text-center div-style-004 div-margin-001 div-padding-001">
@@ -17,8 +19,9 @@
         @for (ushort opcionIndx = 0; opcionIndx < pregunta.Opciones.Count; opcionIndx++)
         {
           var opcion = pregunta.Opciones[opcionIndx];
-          <label class="opcion">
-            &nbsp;&nbsp;&nbsp;<input type="radio" name="rbtn_@pregunta.NumPregunta" value="@opcion.Opcion">&nbsp;
+          idBtn = $"{pregunta.NumPregunta}_{opcion.Opcion}";
+          <label class="opcion" id="lbl_@idBtn">
+            &nbsp;&nbsp;&nbsp;<input type="radio" name="rbtn_@pregunta.NumPregunta" value="@opcion.Opcion" id="@idBtn" >&nbsp;
             @opcion.Opcion
           </label>
         }
@@ -26,10 +29,10 @@
         <div class="rigth">
           <div class="block-line">
             <button id="buttonAceptar_@pregunta.NumPregunta" type="button" class="neon-button-cyan"
-            onclick="aceptarPregunta(@pregunta.NumPregunta, @pregunta.Opciones.Count)"> Aceptar </button>
+            onclick="aceptarPregunta(@pregunta.NumPregunta, @JsonSerializer.Serialize(pregunta.OpcionesCorrectas()))"> Aceptar </button>
           </div>
-          <div class="block-line hidden">
-            <button id="buttonAceptar_@pregunta.NumPregunta" type="button" class="neon-button-cyan"
+          <div id="buttonSiguiente_@pregunta.NumPregunta" class="block-line hidden">
+            <button type="button" class="neon-button-cyan"
             onclick="siguientePaso(@pregunta.NumPregunta, @pregunta.Opciones.Count)"> Siguiente </button>
           </div>
         </div>

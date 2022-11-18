@@ -7,16 +7,33 @@ function iniciaTest(idPregunta) {
   document.getElementById("btn-inicia-test").style.display = "none";
   document.getElementById(idPregunta).style.display = "block";
 }
-function aceptarPregunta(id, idMax) {
+function aceptarPregunta(id, ans) {
+  //alert(JSON.stringify(ans))
   if (validaRbtn(id)) {
-    //Pasamos a la siguiente
-    if (id <= idMax) {
-      document.getElementById("pregunta_" + id).style.display = "none";
-      document.getElementById("pregunta_" + (id + 1)).style.display = "block";
-    } else {
-      document.getElementById("pregunta_" + id).style.display = "none";
-      document.getElementById("resultados").style.display = "block";
+    //Marcamos solo si fue correcta o no
+    let ele = document.getElementsByName("rbtn_" + id);
+    let seleccion;
+    let idBtnSeleccion
+    for (i = 0; i < ele.length; i++) {
+      //Deshabilitamos y marcamos
+      ele[i].disabled = true
+      if (ele[i].checked) {
+        seleccion = ele[i].value
+        idBtnSeleccion = ele[i].id
+      }
     }
+    for (var key in ans) {
+      alert(idBtnSeleccion)
+      if (ans[key]["Opcion"] === seleccion) {
+        document.getElementById("lbl_" + idBtnSeleccion).className = "opcion-correcta"
+        break
+      }else{
+        document.getElementById("lbl_" + idBtnSeleccion).className = "opcion-incorrecta"
+      }
+    }
+    //Ponemos visible el siguiente y ocultamos este boton
+    document.getElementById("buttonAceptar_" + id).style.display = "none";
+    document.getElementById("buttonSiguiente_" + id).style.display = "block";
   }
 }
 function siguientePaso(id, idMax) {

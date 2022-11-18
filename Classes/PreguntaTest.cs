@@ -24,4 +24,14 @@ internal class PreguntaTest
     }
     return opcionesCorrectas;
   }
+  public List<string> OpcionesCorrectasStr()
+  {
+    List<string> opcionesCorrectas = new List<string>();
+    foreach(OpcionPregunta opcion in _opciones)
+    {
+      if(opcion.Valida)
+        opcionesCorrectas.Add(opcion.Opcion);
+    }
+    return opcionesCorrectas;
+  }
 }

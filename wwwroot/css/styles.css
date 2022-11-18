@@ -41,6 +41,9 @@ img {
 .block {
   display: block; }
 
+.block-line {
+  display: inline-block; }
+
 .wrapping {
   background-color: #114b5f;
   color: #e4fde1; }
@@ -170,5 +173,17 @@ body {
     background-color: #402039;
     border-radius: 2rem;
     padding: 0.2rem; }
-  .div-pregunta .opcion:hover {
+  .div-pregunta .opcion-correcta {
+    display: block;
+    margin-bottom: 0.4rem;
+    border-radius: 2rem;
+    padding: 0.2rem;
+    background-color: #2b732d; }
+  .div-pregunta .opcion-incorrecta {
+    display: block;
+    margin-bottom: 0.4rem;
+    border-radius: 2rem;
+    padding: 0.2rem;
     background-color: #da2c38; }
+  .div-pregunta .opcion:hover {
+    background-color: #851173; }

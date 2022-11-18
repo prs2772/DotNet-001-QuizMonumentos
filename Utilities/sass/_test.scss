@@ -31,14 +31,22 @@
   }
   .opcion-correcta
   {
+    display: block;
+    margin-bottom: 0.4rem;
+    border-radius: 2rem;
+    padding: 0.2rem;
     background-color: rgb(43, 115, 45);
   }
   .opcion-incorrecta
   {
+    display: block;
+    margin-bottom: 0.4rem;
+    border-radius: 2rem;
+    padding: 0.2rem;
     background-color: #da2c38;
   }
   .opcion:hover
   {
-    background-color: #da2c38;
+    background-color: #851173;
   }
 }
