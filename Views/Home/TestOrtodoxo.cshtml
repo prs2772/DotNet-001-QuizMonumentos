@@ -1,0 +1,43 @@
+@{
+  ViewData["Title"] = "Test Ortodoxo";
+  Test test = new Test();
+}
+
+<div class="text-center div-style-004 div-margin-001 div-padding-001">
+  <h2 class="display-5">Quiz: Monumentos del mundo</h2>
+  <div class="extra-space"></div>
+  <button id="btn-inicia-test" type="button" class="neon-button-red" onclick="iniciaTest('pregunta_1')"> Iniciar el Test
+  </button>
+  <form method="POST">
+    @for (ushort preguntaIndx = 0; preguntaIndx < test.Preguntas.Count; preguntaIndx++)
+    {
+      var pregunta = test.Preguntas[preguntaIndx];
+      <div class="div-pregunta" id="pregunta_@pregunta.NumPregunta">
+        <p class="title extra-space">@pregunta.NumPregunta.ToString()) @pregunta.Pregunta</p>
+        @for (ushort opcionIndx = 0; opcionIndx < pregunta.Opciones.Count; opcionIndx++)
+        {
+          var opcion = pregunta.Opciones[opcionIndx];
+          <label class="opcion">
+            &nbsp;&nbsp;&nbsp;<input type="radio" name="rbtn_@pregunta.NumPregunta" value="@opcion.Opcion">&nbsp;
+            @opcion.Opcion
+          </label>
+        }
+        <div class="extra-space"></div>
+        <div class="rigth">
+          <div class="block-line">
+            <button id="buttonAceptar_@pregunta.NumPregunta" type="button" class="neon-button-cyan"
+            onclick="aceptarPregunta(@pregunta.NumPregunta, @pregunta.Opciones.Count)"> Aceptar </button>
+          </div>
+          <div class="block-line hidden">
+            <button id="buttonAceptar_@pregunta.NumPregunta" type="button" class="neon-button-cyan"
+            onclick="siguientePaso(@pregunta.NumPregunta, @pregunta.Opciones.Count)"> Siguiente </button>
+          </div>
+        </div>
+      </div>
+    }
+    <div id="resultados" class="hidden">
+      <input type="submit" class="neon-button-cyan" />
+    </div>
+    <p class="hidden">@ViewData["resultados"]</p>
+  </form>
+</div>
