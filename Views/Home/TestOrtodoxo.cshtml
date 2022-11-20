@@ -64,11 +64,22 @@
       StringBuilder resultados = new StringBuilder();
       resultados.Append(ViewData.Eval("resultadosTest"));
       string[] print = resultados.ToString().Split("!SLN!");
-      foreach(string linea in print)
-      {
-
-        <p>@linea&nbsp;</p>
-      }
+      <div class="resultados-finales">
+        <div class="mini-panel">
+          <p>Tus resultados fueron los siguientes</p>
+          <p>@ViewData["resultadosTestNumAciertos"]</p>
+          <p>@ViewData["resultadosTestNumErrores"]</p>
+        </div>
+        @foreach (string linea in print)
+        {
+          string claseLinea = linea.Contains("Tus aciertos") ? "resutados-correctos-header" : 
+            linea.Contains("Tus errores") ? "resutados-incorrectos-header" :
+            string.Empty;
+          <p class="@claseLinea">
+            @linea&nbsp
+          </p>
+        }
+      </div>
     }
   </div>
 </div>

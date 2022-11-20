@@ -200,3 +200,39 @@ body {
   padding: 0.2rem;
   text-align: center;
   background-color: #730d64; }
+
+.resultados-finales {
+  border-radius: 2rem;
+  margin: 0.4rem 1rem 0.2rem 0.2rem;
+  padding-top: 0;
+  padding: 0.4rem;
+  background-color: #292e1e;
+  color: #a0eec0;
+  text-align: left;
+  font-size: 1.2em; }
+
+.resutados-correctos-header {
+  display: block;
+  margin-bottom: 0.2rem;
+  border-radius: 1.5rem;
+  padding: 0.2rem;
+  background-color: #2b732d;
+  color: #8ae9c1;
+  text-align: center; }
+
+.resutados-incorrectos-header {
+  display: block;
+  margin-bottom: 0.4rem;
+  border-radius: 1.5rem;
+  padding: 0.2rem;
+  background-color: #72050c;
+  color: #8ae9c1;
+  text-align: center; }
+
+.mini-panel {
+  display: block;
+  margin-bottom: 0.2rem;
+  border-radius: 1.5rem;
+  padding: 0.2rem;
+  background-color: #1f1e1e;
+  text-align: center; }

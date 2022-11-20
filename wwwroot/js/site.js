@@ -1,17 +1,17 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
-
-if(terminado === "terminado"){
+if (terminado === "terminado") {
   document.getElementById("btn-inicia-test").innerText = "Volver a realizar";
+}else{
+  document.getElementById("resultadosSummary").style.display = "none";
 }
 
 function iniciaTest(idPregunta) {
   document.getElementById("btn-inicia-test").style.display = "none";
   document.getElementById(idPregunta).style.display = "block";
   document.getElementById("counters").style.display = "block";
-  if(terminado === "terminado"){
+  if (terminado === "terminado") {
     document.getElementById("resultadosSummary").style.display = "none";
   }
 }

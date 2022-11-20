@@ -23,6 +23,7 @@ public class HomeController : Controller
   {
     Test test = new Test();
     StringBuilder aciertos = new StringBuilder(), fallos = new StringBuilder();
+    ushort aciertosNum = 0, erroresNum = 0;
     if (HttpMethods.IsPost(Request.Method))
     {
       try
@@ -40,18 +41,23 @@ public class HomeController : Controller
               if (opcion.Valida)
               {
                 aciertos.Append($"#{preguntaIndx + 1}) {pregunta.Pregunta}  ->  Respondiste: {opcion.Opcion}!SLN!");
+                aciertosNum++;
               }
               else
               {
                 fallos.Append($"#{preguntaIndx + 1}) {pregunta.Pregunta}  ->  Respondiste: {opcion.Opcion}!SLN!");
+                erroresNum++;
               }
               break;
             }
           }
         }
-        aciertos.Insert(0, aciertos.Length > 0 ? "!SLN!!SLN!!SLN!Tus aciertos: !SLN!!SLN!" : string.Empty);
-        fallos.Insert(0, fallos.Length > 0 ? "!SLN!!SLN!!SLN!Tus errores: !SLN!!SLN!" : string.Empty);
+        aciertos.Insert(0, aciertos.Length > 0 ? "!SLN!Tus aciertos !SLN!!SLN!" : string.Empty);
+        fallos.Insert(0, fallos.Length > 0 ? "!SLN!Tus errores !SLN!!SLN!" : string.Empty);
+        fallos.Insert(0, aciertos.Length != 0 ? "!SLN!!SLN!" : string.Empty);
         ViewData["resultadosTest"] = aciertos.ToString() + fallos.ToString();
+        ViewData["resultadosTestNumAciertos"] = $"Aciertos en total: { aciertosNum }";
+        ViewData["resultadosTestNumErrores"] = $"Errores en total: { erroresNum }";
         ViewData["terminado"] = "terminado";
       }
       catch (Exception)
