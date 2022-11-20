@@ -1,9 +1,10 @@
-.extra-space
-{
+.extra-space {
   margin-bottom: 1.3rem;
 }
-.div-pregunta
-{
+.extra-space-001 {
+  margin-top: 1.3rem;
+}
+.div-pregunta {
   display: none;
   margin: 3rem 3rem 4rem 4rem;
   padding: 1rem;
@@ -11,42 +12,46 @@
   text-align: left;
   background-color: #5c164e;
   color: $foreColor05;
-  p
-  {
+  p {
     margin-top: 0.4rem;
   }
-  .title
-  {
+  .title {
     font-size: 1.4rem;
     color: #e2fcef;
     font-weight: bold;
   }
-  .opcion
-  {
+  .opcion {
     display: block;
     margin-bottom: 0.4rem;
     background-color: #402039;
     border-radius: 2rem;
     padding: 0.2rem;
   }
-  .opcion-correcta
-  {
+  .opcion-correcta {
     display: block;
     margin-bottom: 0.4rem;
     border-radius: 2rem;
     padding: 0.2rem;
     background-color: rgb(43, 115, 45);
   }
-  .opcion-incorrecta
-  {
+  .opcion-incorrecta {
     display: block;
     margin-bottom: 0.4rem;
     border-radius: 2rem;
     padding: 0.2rem;
     background-color: #da2c38;
   }
-  .opcion:hover
-  {
+  .opcion:hover {
     background-color: #851173;
   }
+}
+.resultados-actuales {
+  width: 70%;
+  margin: auto;
+  padding-left: 2rem;
+  display: block;
+  border-radius: 2rem;
+  padding: 0.2rem;
+  text-align: center;
+  background-color: #730d64;
 }

@@ -3,6 +3,7 @@
   ViewData["Title"] = "Test Ortodoxo";
   Test test = new Test();
   string idBtn;
+  ushort puntuacionActual = 0;
 }
 
 <div class="text-center div-style-004 div-margin-001 div-padding-001">
@@ -15,13 +16,14 @@
     {
       var pregunta = test.Preguntas[preguntaIndx];
       <div class="div-pregunta" id="pregunta_@pregunta.NumPregunta">
+        <label id="lblIndicativo_@pregunta.NumPregunta">Pregunta @pregunta.NumPregunta de @test.Preguntas.Count</label>
         <p class="title extra-space">@pregunta.NumPregunta.ToString()) @pregunta.Pregunta</p>
         @for (ushort opcionIndx = 0; opcionIndx < pregunta.Opciones.Count; opcionIndx++)
         {
           var opcion = pregunta.Opciones[opcionIndx];
           idBtn = $"{pregunta.NumPregunta}_{opcion.Opcion}";
           <label class="opcion" id="lbl_@idBtn">
-            &nbsp;&nbsp;&nbsp;<input type="radio" name="rbtn_@pregunta.NumPregunta" value="@opcion.Opcion" id="@idBtn" >&nbsp;
+            &nbsp;&nbsp;&nbsp;<input class="readonly" type="radio" name="rbtn_@pregunta.NumPregunta" value="@opcion.Opcion" id="@idBtn">&nbsp;
             @opcion.Opcion
           </label>
         }
@@ -29,18 +31,23 @@
         <div class="rigth">
           <div class="block-line">
             <button id="buttonAceptar_@pregunta.NumPregunta" type="button" class="neon-button-cyan"
-            onclick="aceptarPregunta(@pregunta.NumPregunta, @JsonSerializer.Serialize(pregunta.OpcionesCorrectas()))"> Aceptar </button>
-          </div>
-          <div id="buttonSiguiente_@pregunta.NumPregunta" class="block-line hidden">
-            <button type="button" class="neon-button-cyan"
-            onclick="siguientePaso(@pregunta.NumPregunta, @pregunta.Opciones.Count)"> Siguiente </button>
+            onclick="aceptarPregunta(@pregunta.NumPregunta, @test.Preguntas.Count, @JsonSerializer.Serialize(pregunta.OpcionesCorrectas()))">
+              Aceptar </button>
           </div>
         </div>
       </div>
     }
-    <div id="resultados" class="hidden">
-      <input type="submit" class="neon-button-cyan" />
+    <div id="counters" class="hidden">
+      <div class="resultados-actuales">
+        <label id="lblResultadoActual">@puntuacionActual</label>
+        <label id="lblResultadoTexto"> inciso(s) correcto(s)</label>
+      </div>
     </div>
-    <p class="hidden">@ViewData["resultados"]</p>
+    <div class="extra-space-001">
+      <div id="resultados" class="hidden">
+        <input type="submit" class="neon-button-cyan" />
+      </div>
+    </div>
+    <p>@ViewData["resultados"]</p>
   </form>
 </div>

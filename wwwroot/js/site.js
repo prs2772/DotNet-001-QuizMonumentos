@@ -6,8 +6,9 @@
 function iniciaTest(idPregunta) {
   document.getElementById("btn-inicia-test").style.display = "none";
   document.getElementById(idPregunta).style.display = "block";
+  document.getElementById("counters").style.display = "block";
 }
-function aceptarPregunta(id, ans) {
+function aceptarPregunta(id, idMax, ans) {
   //alert(JSON.stringify(ans))
   if (validaRbtn(id)) {
     //Marcamos solo si fue correcta o no
@@ -15,30 +16,32 @@ function aceptarPregunta(id, ans) {
     let seleccion;
     let idBtnSeleccion
     for (i = 0; i < ele.length; i++) {
-      //Deshabilitamos y marcamos
-      ele[i].disabled = true
+      //Marcamos
       if (ele[i].checked) {
         seleccion = ele[i].value
         idBtnSeleccion = ele[i].id
       }
     }
+    let alertMess = ""
     for (var key in ans) {
-      alert(idBtnSeleccion)
       if (ans[key]["Opcion"] === seleccion) {
         document.getElementById("lbl_" + idBtnSeleccion).className = "opcion-correcta"
+        document.getElementById("lblResultadoActual").innerText = (parseInt(document.getElementById("lblResultadoActual").innerHTML) + 1)
+        alertMess = "¡Correcto!"
         break
       }else{
         document.getElementById("lbl_" + idBtnSeleccion).className = "opcion-incorrecta"
+        alertMess = "Hmmm. No, esa no es la respuesta"
       }
     }
-    //Ponemos visible el siguiente y ocultamos este boton
-    document.getElementById("buttonAceptar_" + id).style.display = "none";
-    document.getElementById("buttonSiguiente_" + id).style.display = "block";
+    //Ponemos visible el siguiente y ocultamos este botón
+    siguientePaso(id, idMax, alertMess)
   }
 }
-function siguientePaso(id, idMax) {
+function siguientePaso(id, idMax, alertMess) {
   //Pasamos a la siguiente
-  if (id <= idMax) {
+  alert(alertMess)
+  if (id < idMax) {
     document.getElementById("pregunta_" + id).style.display = "none";
     document.getElementById("pregunta_" + (id + 1)).style.display = "block";
   } else {
@@ -57,7 +60,4 @@ function validaRbtn(id) {
   }
   if (!formValid) alert("Antes de continuar, selecciona una opción");
   return formValid;
-}
-function getSelectedRbtnValue(name) {
-  return true;
 }

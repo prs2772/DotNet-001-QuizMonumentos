@@ -153,6 +153,9 @@ body {
 .extra-space {
   margin-bottom: 1.3rem; }
 
+.extra-space-001 {
+  margin-top: 1.3rem; }
+
 .div-pregunta {
   display: none;
   margin: 3rem 3rem 4rem 4rem;
@@ -187,3 +190,16 @@ body {
     background-color: #da2c38; }
   .div-pregunta .opcion:hover {
     background-color: #851173; }
+
+.resultados-actuales {
+  width: 70%;
+  margin: auto;
+  padding-left: 2rem;
+  display: block;
+  border-radius: 2rem;
+  padding: 0.2rem;
+  text-align: center;
+  background-color: #730d64; }
+
+input[type="radio"] {
+  pointer-events: none; }
