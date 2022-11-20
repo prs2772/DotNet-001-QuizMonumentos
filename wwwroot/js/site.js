@@ -3,44 +3,53 @@
 
 // Write your JavaScript code.
 
+if(terminado === "terminado"){
+  document.getElementById("btn-inicia-test").innerText = "Volver a realizar";
+}
+
 function iniciaTest(idPregunta) {
   document.getElementById("btn-inicia-test").style.display = "none";
   document.getElementById(idPregunta).style.display = "block";
   document.getElementById("counters").style.display = "block";
+  if(terminado === "terminado"){
+    document.getElementById("resultadosSummary").style.display = "none";
+  }
 }
-function aceptarPregunta(id, idMax, ans) {
+function aceptarPregunta(id, ans) {
   //alert(JSON.stringify(ans))
   if (validaRbtn(id)) {
     //Marcamos solo si fue correcta o no
     let ele = document.getElementsByName("rbtn_" + id);
     let seleccion;
-    let idBtnSeleccion
+    let idBtnSeleccion;
     for (i = 0; i < ele.length; i++) {
       //Marcamos
       if (ele[i].checked) {
-        seleccion = ele[i].value
-        idBtnSeleccion = ele[i].id
+        seleccion = ele[i].value;
+        idBtnSeleccion = ele[i].id;
+      } else {
+        document.getElementById("lbl_" + ele[i].id).className = "hidden";
       }
     }
-    let alertMess = ""
     for (var key in ans) {
       if (ans[key]["Opcion"] === seleccion) {
-        document.getElementById("lbl_" + idBtnSeleccion).className = "opcion-correcta"
-        document.getElementById("lblResultadoActual").innerText = (parseInt(document.getElementById("lblResultadoActual").innerHTML) + 1)
-        alertMess = "¡Correcto!"
-        break
-      }else{
-        document.getElementById("lbl_" + idBtnSeleccion).className = "opcion-incorrecta"
-        alertMess = "Hmmm. No, esa no es la respuesta"
+        document.getElementById("lbl_" + idBtnSeleccion).className =
+          "opcion-correcta";
+        document.getElementById("lblResultadoActual").innerText =
+          parseInt(document.getElementById("lblResultadoActual").innerHTML) + 1;
+        break;
+      } else {
+        document.getElementById("lbl_" + idBtnSeleccion).className =
+          "opcion-incorrecta";
       }
     }
-    //Ponemos visible el siguiente y ocultamos este botón
-    siguientePaso(id, idMax, alertMess)
+    document.getElementById("buttonAceptar_" + id).style.display = "none";
+    document.getElementById("div_buttonSiguiente_" + id).style.display =
+      "block";
   }
 }
-function siguientePaso(id, idMax, alertMess) {
+function siguientePaso(id, idMax) {
   //Pasamos a la siguiente
-  alert(alertMess)
   if (id < idMax) {
     document.getElementById("pregunta_" + id).style.display = "none";
     document.getElementById("pregunta_" + (id + 1)).style.display = "block";

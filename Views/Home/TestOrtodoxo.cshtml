@@ -1,10 +1,14 @@
 @using System.Text.Json
+@using System.Text
 @{
   ViewData["Title"] = "Test Ortodoxo";
   Test test = new Test();
   string idBtn;
   ushort puntuacionActual = 0;
 }
+<script type="text/javascript">
+  var terminado = '@ViewData["terminado"]'
+</script>
 
 <div class="text-center div-style-004 div-margin-001 div-padding-001">
   <h2 class="display-5">Quiz: Monumentos del mundo</h2>
@@ -23,7 +27,8 @@
           var opcion = pregunta.Opciones[opcionIndx];
           idBtn = $"{pregunta.NumPregunta}_{opcion.Opcion}";
           <label class="opcion" id="lbl_@idBtn">
-            &nbsp;&nbsp;&nbsp;<input class="readonly" type="radio" name="rbtn_@pregunta.NumPregunta" value="@opcion.Opcion" id="@idBtn">&nbsp;
+            &nbsp;&nbsp;&nbsp;<input class="readonly" type="radio" name="rbtn_@pregunta.NumPregunta" value="@opcion.Opcion"
+          id="@idBtn">&nbsp;
             @opcion.Opcion
           </label>
         }
@@ -31,8 +36,13 @@
         <div class="rigth">
           <div class="block-line">
             <button id="buttonAceptar_@pregunta.NumPregunta" type="button" class="neon-button-cyan"
-            onclick="aceptarPregunta(@pregunta.NumPregunta, @test.Preguntas.Count, @JsonSerializer.Serialize(pregunta.OpcionesCorrectas()))">
+            onclick="aceptarPregunta(@pregunta.NumPregunta, @JsonSerializer.Serialize(pregunta.OpcionesCorrectas()))">
               Aceptar </button>
+          </div>
+          <div id="div_buttonSiguiente_@pregunta.NumPregunta" class="block-line hidden">
+            <button id="buttonSiguiente_@pregunta.NumPregunta" type="button" class="neon-button-cyan"
+            onclick="siguientePaso(@pregunta.NumPregunta, @test.Preguntas.Count)">
+              Siguiente </button>
           </div>
         </div>
       </div>
@@ -45,9 +55,20 @@
     </div>
     <div class="extra-space-001">
       <div id="resultados" class="hidden">
-        <input type="submit" class="neon-button-cyan" />
+        <input type="submit" class="neon-button-cyan" value="Ver Resumen" />
       </div>
     </div>
-    <p>@ViewData["resultados"]</p>
   </form>
+  <div id="resultadosSummary" class="formato-resultados">
+    @{
+      StringBuilder resultados = new StringBuilder();
+      resultados.Append(ViewData.Eval("resultadosTest"));
+      string[] print = resultados.ToString().Split("!SLN!");
+      foreach(string linea in print)
+      {
+
+        <p>@linea&nbsp;</p>
+      }
+    }
+  </div>
 </div>

@@ -200,6 +200,3 @@ body {
   padding: 0.2rem;
   text-align: center;
   background-color: #730d64; }
-
-input[type="radio"] {
-  pointer-events: none; }

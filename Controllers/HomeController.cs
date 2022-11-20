@@ -22,9 +22,7 @@ public class HomeController : Controller
   public IActionResult TestOrtodoxo()
   {
     Test test = new Test();
-    StringBuilder result = new StringBuilder();
-    List<string> aciertos = new List<string>();
-    List<string> fallos = new List<string>();
+    StringBuilder aciertos = new StringBuilder(), fallos = new StringBuilder();
     if (HttpMethods.IsPost(Request.Method))
     {
       try
@@ -33,6 +31,7 @@ public class HomeController : Controller
         {
           var pregunta = test.Preguntas[preguntaIndx];
           string opcSelected = Request.Form[$"rbtn_{pregunta.NumPregunta}"].ToString();
+          //Por cada opción de la pregunta actual ->
           for (ushort opcionIndx = 0; opcionIndx < pregunta.Opciones.Count; opcionIndx++)
           {
             OpcionPregunta opcion = pregunta.Opciones[opcionIndx];
@@ -40,27 +39,27 @@ public class HomeController : Controller
             {
               if (opcion.Valida)
               {
-                aciertos.Add(pregunta.Pregunta + " -> " + opcion.Opcion);
+                aciertos.Append($"#{preguntaIndx + 1}) {pregunta.Pregunta}  ->  Respondiste: {opcion.Opcion}!SLN!");
               }
               else
               {
-                fallos.Add(pregunta.Pregunta + " -> " + opcion.Opcion);
+                fallos.Append($"#{preguntaIndx + 1}) {pregunta.Pregunta}  ->  Respondiste: {opcion.Opcion}!SLN!");
               }
               break;
             }
           }
         }
-        foreach(string cadena in aciertos)
-        {
-          Console.WriteLine(cadena);
-        }
-        foreach(string cadena in aciertos)
-        {
-          Console.WriteLine(cadena);
-        }
+        aciertos.Insert(0, aciertos.Length > 0 ? "!SLN!!SLN!!SLN!Tus aciertos: !SLN!!SLN!" : string.Empty);
+        fallos.Insert(0, fallos.Length > 0 ? "!SLN!!SLN!!SLN!Tus errores: !SLN!!SLN!" : string.Empty);
+        ViewData["resultadosTest"] = aciertos.ToString() + fallos.ToString();
+        ViewData["terminado"] = "terminado";
       }
       catch (Exception)
       { }
+    }
+    else
+    {
+      ViewData["resultadosTest"] = string.Empty;
     }
     return View();
   }
